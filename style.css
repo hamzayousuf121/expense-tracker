@@ -1,0 +1,28 @@
+li{
+    list-style: none;
+    text-transform: capitalize;
+}
+ul{
+    padding: 0px !important;
+}
+.expense-container{
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
+    
+    padding: 25px !important;
+    min-height: fit-content;
+}
+label{
+    font-weight: bolder;
+}
+#incomeError, #expenseError{
+    color: red;
+}
+
+.right{
+    float: right;
+    margin-right: 5px;
+    margin-top: -5px;
+}

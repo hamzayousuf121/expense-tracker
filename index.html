@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-6 col-md-8 col-12 col-sm-12 my-5 expense-container">
+                <h1 class="text-center">Expense Tracker App</h1>
+                <input type="number" id="income" class="form-control" required placeholder="Enter Your Income">
+                <div id="incomeError"></div>
+                <button onclick="addIncome()" class="btn btn-primary btn-block mt-3">Add Income</button>
+                <h4 id="currentIncome"></h4>
+                <div id="expenseForm">
+                    <label for="expense">
+                        Expense:
+                    </label> <br />
+                    <input type="number" id="expense" class="form-control" required placeholder="Enter Your Expense" />
+                    <div id="expenseError"></div>
+                    <label>Category:</label> <br />
+                    <select id="category" class="form-control">
+                        <option value="food">Food</option>
+                        <option value="bike">Bike</option>
+                        <option value="rent">Rent</option>
+                        <option value="easy load">Easy Load</option>
+                        <option value="petrol">Petrol</option>
+                        <option value="bike oil">Bike Oil</option>
+                    </select>
+                    <label>Select Date:</label><br>
+                    <input type="date" class="form-control" required id="date"/>
+                    <button onclick="addExpense()" class="btn btn-primary btn-block mt-3">Add Expense</button>
+                    </label>
+                    <label>
+                        Search Expense: </label>
+                    <br />
+                    <select id="showExpense" onchange="showFilterExpense()" class="form-control">
+                        <option value="all">All</option>
+                        <option value="food">Food</option>
+                        <option value="bike">Bike</option>
+                        <option value="rent">Rent</option>
+                        <option value="easy load">Easy Load</option>
+                        <option value="petrol">Petrol</option>
+                        <option value="bike oil">Bike Oil</option>
+                    </select>
+                    <label>Search Date By Date:</label><br>
+                    <input type="date" class="form-control" required id="searchDate" onchange="showFilterExpenseDate()"/>
+                </div>
+                <h5>Transactions</h5>
+                <ul id="expenses"></ul>
+                <div class="list-group" id="expenses">
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Modal Open -->
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+          <input type="number" value="" id="modalValue" class="form-control" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
