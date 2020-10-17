@@ -76,7 +76,8 @@ function renderItem() {
     var Date;
     for (var i = 0; i < expenses.length; i++) {
         Date = expenses[i].date;
-        item += `<li class='list-group-item list-group-item-action' id='${i}'>${expenses[i].expense}-${expenses[i].category}<span class="bold">-Date ${Date.split("-").reverse().join("/")}</span>
+        item += `<li class='list-group-item list-group-item-action' id='${i}'>${expenses[i].expense}-${expenses[i].category}
+        <span class="mx-3"><b>Date:</b> ${Date.split("-").reverse().join("/")}</span>
             <button class='btn btn-danger default right' onclick='deleteExpense(this)'>Delete</button>
             <button class='btn btn-warning right' onclick='editExpense(this)' data-target='#exampleModal' data-toggle='modal'>Edit</button> </li>`;
     }
