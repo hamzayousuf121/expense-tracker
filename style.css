@@ -1,3 +1,11 @@
+
+body{
+	background-image: linear-gradient(to right bottom, #f42ef4, #9e84ff, #00adff, #00c7ff, #00d8ff, #35deeb, #62e2d5, #88e4c1, #9dde9f, #bad57f, #dbc867, #fbb75f);
+}
+.ml2{
+    color: orangered;
+}
+
 li {
 	list-style: none;
 	text-transform: capitalize;
