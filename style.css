@@ -1,28 +1,46 @@
-li{
-    list-style: none;
-    text-transform: capitalize;
+li {
+	list-style: none;
+	text-transform: capitalize;
 }
-ul{
-    padding: 0px !important;
+ul {
+	padding: 0px !important;
 }
-.expense-container{
-    border-radius: 20px;
-    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
-    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
-    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
-    
-    padding: 25px !important;
-    min-height: fit-content;
+.expense-container {
+	border-radius: 20px;
+	-webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
+	-moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
+	box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.16);
+
+	padding: 25px !important;
+	min-height: fit-content;
 }
-label{
-    font-weight: bolder;
+label {
+	font-weight: bolder;
 }
-#incomeError, #expenseError{
-    color: red;
+#incomeError,
+#expenseError {
+	color: red;
 }
 
-.right{
-    float: right;
-    margin-right: 5px;
+.right {
+	float: right;
+	margin-right: 5px;
     margin-top: -5px;
+    color: white;
+}
+.updateCat{
+    text-transform: capitalize;
+}
+@media (max-width: 600px) {
+	.right {
+		display: block;
+		float: none;
+		width: 100%;
+        margin-top: 10px !important;
+        color: white;
+    }
+    h1{
+        font-size: 33px;
+        color: purple;
+    }
 }

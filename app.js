@@ -1,12 +1,11 @@
-
-
 var saving = 0;
 var list = document.getElementById("expenses");
 var expenses = [];
 var incomeError = document.querySelector('#incomeError')
 var expenseError = document.querySelector('#expenseError')
 var datePicker = document.querySelector('#date')
-var modalValue = document.querySelector('#modalValue')
+var editExpenseValue = document.querySelector('#editExpense')
+var editCategory = document.querySelector('#editCategory')
 var searchDate = document.querySelector('#searchDate')
 
 function Expense(expense, category, date) {
@@ -29,7 +28,7 @@ function addIncome() {
 }
 
 function showIncome() {
-    document.getElementById("currentIncome").innerText = "Saving " + saving;
+    document.getElementById("currentIncome").innerText = "Your Balance " + saving;
     document.getElementById("income").value = '';
 }
 
@@ -39,7 +38,6 @@ function addExpense() {
     if (datePicker.value !== '' && expense.value !== '') {
         var newExpense = new Expense(parseInt(expense.value), category.value, datePicker.value)
         expenses.push(newExpense)
-        console.log(newExpense)
         saving -= parseInt(expense.value)
         showIncome()
         renderItem()
@@ -54,31 +52,15 @@ function addExpense() {
 
 function renderItem() {
     var item = "";
-
+    var Date;
     for (var i = 0; i < expenses.length; i++) {
-        var li = document.createElement('li')
-        var deleteButton = document.createElement('button')
-        var editButton = document.createElement('button')
-        var span = document.createElement('span')
-        li.setAttribute('class', 'list-group-item list-group-item-action')
-
-        deleteButton.setAttribute('class', 'btn btn-danger right')
-        deleteButton.setAttribute('onclick', 'deleteTodo(this)')
-        deleteButton.appendChild(document.createTextNode('Delete'))
-
-        editButton.setAttribute('class', 'btn btn-warning default right')
-        editButton.setAttribute('onclick', 'editTodo(this)')
-        editButton.setAttribute('data-toggle', 'modal')
-        editButton.setAttribute('data-target', '#exampleModal')
-
-        editButton.appendChild(document.createTextNode('Edit'))
-        li.appendChild(document.createTextNode(`${expenses[i].expense} - ${expenses[i].category}`))
-        span.appendChild(document.createTextNode(`Date : ${expenses[i].date}`))
-        li.appendChild(span)
-        li.appendChild(deleteButton)
-        li.appendChild(editButton)
-        list.appendChild(li)
+        Date = expenses[i].date;
+        item += `<li class='list-group-item list-group-item-action' id='${i}'>${expenses[i].expense}-${expenses[i].category}<span class="bold">-Date ${Date.split("-").reverse().join("/")}</span>
+            <button class='btn btn-danger default right' onclick='deleteExpense(this)'>Delete</button>
+            <button class='btn btn-warning right' onclick='editExpense(this)' data-target='#exampleModal' data-toggle='modal'>Edit</button> </li>`;
     }
+    list.innerHTML = item
+
 }
 
 function showFilterExpense() {
@@ -87,9 +69,14 @@ function showFilterExpense() {
     var item = "";
     for (var i = 0; i < expenses.length; i++) {
         if (category === "all") {
-            item += "<li class='list-group-item list-group-item-action'>" + expenses[i].expense + " - " + expenses[i].category + "</li>"
+            item += `<li class='list-group-item list-group-item-action' id='${i}'>${expenses[i].expense}-${expenses[i].category}<span class="bold">-Date ${expenses[i].date}</span>
+            <button class='btn btn-danger default right' onclick='deleteExpense(this)'>Delete</button>
+            <button class='btn btn-warning  right' onclick='editExpense(this)' data-target='#exampleModal' data-toggle='modal'>Edit</button> </li>`;
+
         } else if (category === expenses[i].category) {
-            item += "<li class='list-group-item list-group-item-action'>" + expenses[i].expense + " - " + expenses[i].category + "</li>"
+            item += `<li class='list-group-item list-group-item-action' id='${i}'>${expenses[i].expense}-${expenses[i].category}<span class="bold">-Date ${expenses[i].date}</span>
+            <button class='btn btn-danger default right' onclick='deleteExpense(this)'>Delete</button>
+            <button class='btn btn-warning  right' onclick='editExpense(this)' data-target='#exampleModal' data-toggle='modal'>Edit</button> </li>`;
         }
     }
     list.innerHTML = item
@@ -100,32 +87,40 @@ function showFilterExpenseDate() {
     for (var i = 0; i < expenses.length; i++) {
         if (searchDate.value === expenses[i].date) {
             found = true;
-            item += "<li class='list-group-item list-group-item-action'>" + expenses[i].expense + " - " + expenses[i].category + "</li>"
+            item += `<li class='list-group-item list-group-item-action' id='${i}'>${expenses[i].expense}-${expenses[i].category}<span class="bold">-Date ${expenses[i].date}</span>
+            <button class='btn btn-danger default right' onclick='deleteExpense(this)'>Delete</button>
+            <button class='btn btn-warning  right' onclick='editExpense(this)' data-target='#exampleModal' data-toggle='modal'>Edit</button> </li>`;
         }
     }
     if (!found) {
         item = `<li class='list-group-item list-group-item-action'> No Result Found </li>`;
     }
-    console.log(item)
-    console.log(searchDate.value,  ' = searchDate.value ')
     list.innerHTML = item
 }
 
-const editTodo = (e) => {
-    // modalValue.value
-    console.log(e.parentNode.firstChild.nodeValue)
+editExpense = (e) => {
+    var listIndex = e.parentNode;
+    localStorage.setItem('id', parseInt(listIndex.id))
+    var data = expenses[parseInt(listIndex.id)];
+    editExpenseValue.value = parseInt(data.expense);
+    var UpdateSelectedIndex = editCategory.selectedIndex
+    editCategory.selectedIndex = UpdateSelectedIndex    
 }
-deleteTodo = (e) => {
-    e.parentNode.remove();
-}
-// editTodo = (e) => {
-//     var updateTodoValue = document.getElementById('updateTodoValue')
-//     updateTodoValue.value = e.parentNode.firstChild.nodeValue
-//     localStorage.setItem('id', e.parentNode.id);
-// }
-updatetodo = () => {
+
+updateExpense = () => {
     var id = localStorage.getItem('id');
-    document.getElementById(id).firstChild.nodeValue = updateTodoValue.value;
-    document.getElementById(id).firstChild.nodeValue.style.color = 'green';
+    var updatedCategoryValue = editCategory.value;
+    var updatedExpenseValue = editExpenseValue.value;
+
     localStorage.removeItem('id')
+    expenses.splice(parseInt(id), 1, {'expense': updatedExpenseValue, 'category': updatedCategoryValue, 'date': expenses[parseInt(id)].date});
+    renderItem()
+}
+
+
+deleteExpense = (e) => {
+    var listIndex = e.parentNode;
+    listIndex.remove();
+    expenses.splice(parseInt(listIndex.id), 1)
+    renderItem()
 }
