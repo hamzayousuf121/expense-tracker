@@ -1,5 +1,5 @@
-# expense-tracker
-Vanilla Javascript Expense Tracker App With Date Filter &amp; Fully Crud Operation Performed.
+# Expense Tracker App
+Javascript Expense Tracker App With Add, Edit, Update, Delete Funtioanlity and search by category and search by date filter
 
 Live Preview:
 
